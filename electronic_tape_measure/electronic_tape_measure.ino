@@ -7,6 +7,11 @@
 // include the library code:
 #include <LiquidCrystal.h>
 
+// initialize the library by associating any needed LCD interface pin
+// with the arduino pin number it is connected to
+const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+
 // macro definition for the rotatary encoder, see: https://components101.com/sites/default/files/component_datasheet/KY-04-Rotary-Encoder-Datasheet.pdf
 // TODO: set to correct values
 #define CLK_PIN 2 // "A" pin A ideally can handle an interrupt
@@ -14,11 +19,6 @@
 #define SW_PIN 4 // the built in switch
 
 // volatile unsigned int foo; <= see: https://gammon.com.au/interrupts
-
-// initialize the library by associating any needed LCD interface pin
-// with the arduino pin number it is connected to
-const int rs = 12, en = 11, d4 = 5, d5 = 4, d6 = 3, d7 = 2;
-LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
 
 unsigned long _lastIncReadTime = micros(); 
 unsigned long _lastDecReadTime = micros(); 
@@ -66,7 +66,7 @@ void loop() {
   }
 
   // If button on encoder (SW_PIN) is pressed, reset
-  if(SW_PIN){
+  if(digitalRead(SW_PIN)){
     counter = 0;
   }
 }
