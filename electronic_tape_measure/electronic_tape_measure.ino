@@ -26,7 +26,7 @@ LiquidCrystal lcd(RS_PIN, EN_PIN, D4_PIN, D5_PIN, D6_PIN, D7_PIN);
 
 // volatile unsigned int foo; <= see: https://gammon.com.au/interrupts
 
-volatile uint8_t pulse_count = 0;
+volatile uint16_t pulse_count = 0;
 
 void setup() {
   Serial.begin(115200);
@@ -45,7 +45,7 @@ void setup() {
 }
 
 void loop() {
-  static uint8_t prev_pulse_count = -1;
+  static uint16_t prev_pulse_count = -1;
   static uint8_t prev_button_state = HIGH;
   // If count has changed print the new value to serial
   if (pulse_count != prev_pulse_count) {
