@@ -9,12 +9,12 @@
 
 // initialize the library by associating any needed LCD interface pin
 // with the arduino pin number it is connected to
-#define RS_PIN 12
-#define EN_PIN 11
-#define D4_PIN 5
-#define D5_PIN 4
-#define D6_PIN 3
-#define D7_PIN 2
+#define RS_PIN 10
+#define EN_PIN 9
+#define D4_PIN 8
+#define D5_PIN 7
+#define D6_PIN 6
+#define D7_PIN 5
 
 LiquidCrystal lcd(RS_PIN, EN_PIN, D4_PIN, D5_PIN, D6_PIN, D7_PIN);
 
