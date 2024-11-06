@@ -9,12 +9,12 @@
 
 // initialize the library by associating any needed LCD interface pin
 // with the arduino pin number it is connected to
-#define RS_PIN 10
-#define EN_PIN 9
-#define D4_PIN 8
-#define D5_PIN 7
-#define D6_PIN 6
-#define D7_PIN 5
+#define RS_PIN 5
+#define EN_PIN 6
+#define D4_PIN 7
+#define D5_PIN 8
+#define D6_PIN 9
+#define D7_PIN 10
 
 LiquidCrystal lcd(RS_PIN, EN_PIN, D4_PIN, D5_PIN, D6_PIN, D7_PIN);
 
@@ -45,8 +45,8 @@ void setup() {
 }
 
 void loop() {
-  static int prev_pulse_count = 0;
-  static int prev_button_state = LOW;
+  static int prev_pulse_count = -1;
+  static int prev_button_state = HIGH;
   // If count has changed print the new value to serial
   if (pulse_count != prev_pulse_count) {
     //Serial.println(counter);
@@ -57,8 +57,9 @@ void loop() {
   }
   // If button on encoder (SW_PIN) is pressed, reset
   int button_state = digitalRead(SW_PIN);
+  //Serial.println(button_state);
   if (button_state != prev_button_state) {
-    if (button_state == HIGH) {
+    if (button_state == LOW) {
       pulse_count = 0;
     }
     // ignore case for LOW button
