@@ -27,6 +27,7 @@ LiquidCrystal lcd(RS_PIN, EN_PIN, D4_PIN, D5_PIN, D6_PIN, D7_PIN);
 // volatile unsigned int foo; <= see: https://gammon.com.au/interrupts
 
 volatile uint16_t pulse_count = 0;
+volatile bool update_lcd = true;
 
 void setup() {
   Serial.begin(115200);
@@ -45,15 +46,14 @@ void setup() {
 }
 
 void loop() {
-  static uint16_t prev_pulse_count = -1;
   static uint8_t prev_button_state = HIGH;
   // If count has changed print the new value to serial
-  if (pulse_count != prev_pulse_count) {
+  if (update_lcd) {
+    update_lcd = false;
     //Serial.println(counter);
     // print the the counter
     lcd.clear();
     lcd.print(pulse_count);
-    prev_pulse_count = pulse_count;  // TODO: this functionality could perhaps be replaced with a flag set in the ISR? not sure, discuss
     lcd.setCursor(0, 2);
     lcd.print("d = ");
     lcd.print((pulse_count*0.4346) + 1.4679);
@@ -89,11 +89,13 @@ void handlePulse() {
   if (encval > 3) {
     // four steps forward
     pulse_count++;  // increment pulse_count
+    update_lcd = true;
     encval = 0;
   } else if (encval < -3) {
     // four steps backwards
     if (pulse_count > 0) {
       pulse_count--;
+      update_lcd=true;
     }
     encval = 0;
   }
