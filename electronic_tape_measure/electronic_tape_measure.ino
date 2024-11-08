@@ -58,6 +58,7 @@ void loop() {
     lcd.print("d = ");
     lcd.print((pulse_count * 0.4346) + 1.4679);
     lcd.print(" mm");
+    Serial.println(pulse_count);
   }
   // If button on encoder (SW_PIN) is pressed, reset
   int button_state = digitalRead(SW_PIN);
@@ -66,6 +67,7 @@ void loop() {
     if (button_state == LOW) {
       pulse_count = 0;
       update_lcd = true;
+      Serial.println("RESET");
     }
     // ignore case for LOW button
   }
