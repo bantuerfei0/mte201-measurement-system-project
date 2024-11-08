@@ -56,7 +56,7 @@ void loop() {
     prev_pulse_count = pulse_count;  // TODO: this functionality could perhaps be replaced with a flag set in the ISR? not sure, discuss
     lcd.setCursor(0, 2);
     lcd.print("d = ");
-    lcd.print(pulse_count*0.5);
+    lcd.print((pulse_count*0.4346) + 1.4679);
     lcd.print(" mm");
   }
   // If button on encoder (SW_PIN) is pressed, reset
