@@ -56,15 +56,18 @@ void loop() {
     lcd.print(pulse_count);
     lcd.setCursor(0, 2);
     lcd.print("d = ");
-    lcd.print((pulse_count*0.4346) + 1.4679);
+    lcd.print((pulse_count * 0.4346) + 1.4679);
     lcd.print(" mm");
+    Serial.println(pulse_count);
   }
   // If button on encoder (SW_PIN) is pressed, reset
   int button_state = digitalRead(SW_PIN);
-  //Serial.println(button_state);
+  //Serial.println(zbutton_state);
   if (button_state != prev_button_state) {
     if (button_state == LOW) {
       pulse_count = 0;
+      update_lcd = true;
+      Serial.println("RESET");
     }
     // ignore case for LOW button
   }
@@ -95,7 +98,7 @@ void handlePulse() {
     // four steps backwards
     if (pulse_count > 0) {
       pulse_count--;
-      update_lcd=true;
+      update_lcd = true;
     }
     encval = 0;
   }
