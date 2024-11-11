@@ -56,7 +56,7 @@ void loop() {
     lcd.print(pulse_count);
     lcd.setCursor(0, 2);
     lcd.print("d = ");
-    lcd.print((pulse_count * 0.4346) + 1.4679);
+    lcd.print((pulse_count * 0.4265) - 0.2487);
     lcd.print(" mm");
     Serial.println(pulse_count);
   }
